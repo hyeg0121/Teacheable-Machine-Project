@@ -9,7 +9,22 @@
     <title>포즈 따라하기</title>
 </head>
 <body>
-    <div class="title">포즈를 따라해보세요</div>
+    <div class="title">티처블 네컷</div>
+    <span>정해진 포즈 네가지를 따라해보세요!</span>
+    <section>
+        <article>
+            <img src="" alt="브이">
+        </article>
+        <article>
+            <img src="" alt="">
+        </article>
+        <article>
+            <img src="" alt="">
+        </article>
+        <article>
+            <img src="" alt="">
+        </article>
+    </section>
     <div class="frame">
         <button class="start_btn" type="button" onclick="init()">시작하기</button>
     </div>
@@ -20,6 +35,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
+
+        let poseIndex = 0;
+
         // More API functions here:
         // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
@@ -66,17 +84,23 @@
 
         // run the webcam image through the image model
         async function predict() {
+
+            setTimeout(function(){}, 3000);
+
             // predict can take in an image, video or canvas html element
             const prediction = await model.predict(webcam.canvas);
             const strings = "브이,손하트,헛!,꽃받침".split(",");
             
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
-                    strings[i] + ": " + (prediction[i].probability*100).toFixed(0) + "%";
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+                    strings[poseIndex] + ": " + (prediction[poseIndex].probability*100).toFixed(0) + "%";
+                labelContainer.childNodes[i].style.display = `none`;
+                labelContainer.childNodes[poseIndex].style.display = `block`;
+                labelContainer.childNodes[poseIndex].innerHTML = classPrediction;
 
-                if ((prediction[0].probability*100).toFixed(0) > 97){
+                if ((prediction[poseIndex].probability*100).toFixed(0) > 98){
                     init(); 
+                    poseIndex++;
                 }
             }
             
