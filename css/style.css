@@ -65,8 +65,9 @@ section {
 section article {
     width: 15vw;
     height: 15vw;
-    background-color: aqua;
-    margin-bottom: 10vh;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    margin-bottom: 3vh;
 }
 
 section article img {
@@ -98,19 +99,21 @@ section article img {
     border: rgba(65, 55, 255, 1) 1px solid;
 }
 
-.webcam-container{
-    width: 50vw;
-    height: 50vh;
+#webcam-container{
+    width: 60vw;
+    height: 30vh;
     display: flex;
     padding: 15px;
+    border: #181818 1px solid;
+    margin-top: -5vh;
 }
 
-.webcam-container{
-    width: 50vw;
-    height: 50vh;
-    box-sizing: border-box;
-    background-color: #FFF;
+#label-container {
+    width: 60vw;
+    height: 15vh;
+    margin-top: -10vh;
     display: flex;
+    justify-content: space-evenly;
 }
 
 #label-container div {
